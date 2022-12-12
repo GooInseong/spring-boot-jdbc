@@ -1,0 +1,19 @@
+server:
+  port: 9000
+  servlet:
+    encoding:
+      charset: UTF-8
+
+
+spring:
+  application:
+    name: demo
+
+
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://balidb.ckevuiz8guuf.ap-northeast-2.rds.amazonaws.com/baliInstagram?autoReconnect=true # 변경해주세요
+    username:  gooinsung
+    password:  Rndlstjd112!
+    driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
+    # driver-class-name: com.mysql.jdbc.Driver # mysql 5버전
