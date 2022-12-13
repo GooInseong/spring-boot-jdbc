@@ -107,26 +107,29 @@ public class UserDao {
         },userNum);
     }
 
-    public List<GetUserResponse> getFollowerInfo(List<Integer> follower){
-        String query="select userNum, userId, userName, userNickName from user where status='active' and userNum=?";
-        List<GetUserResponse> response= new ArrayList<>();
-        System.out.println("팔로워 수:"+follower.size());
-        for(int i=0; i<follower.size();i++){
-            System.out.println("팔로워 "+(i+1)+": "+follower.get(i));
-            response.add(this.jdbcTemplate.queryForObject(query, new RowMapper<GetUserResponse>() {
-                @Override
-                public GetUserResponse mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    GetUserResponse res=new GetUserResponse();
-                    res.setUserId(rs.getString("userId"));
-                    res.setUserName(rs.getString("userName"));
-                    res.setUserNum(rs.getInt("userNum"));
-                    res.setUserNickName(rs.getString("userNickName"));
 
-                    return res;
-                }
-            },follower.get(i)));
-        }
-        return response;
+    public List<GetUserResponse> gertFollowerInfo(int userNum){
+        String query="select u.userNum, u.userId, u.userName, u.userNickName from follow f " +
+                "inner join user u on f.following=u.userNum " +
+                "where f.follower=?";
+        return this.jdbcTemplate.query(query,  (rs,rowNum) -> new GetUserResponse(
+                rs.getInt("u.userNum"),
+                rs.getString("u.userId"),
+                rs.getString("u.userName"),
+                rs.getString("u.userNickNAme"))
+                ,userNum);
+    }
+
+    public List<GetUserResponse> gertFollowingInfo(int userNum){
+        String query="select u.userNum, u.userId, u.userName, u.userNickName from follow f " +
+                "inner join user u on f.follower=u.userNum " +
+                "where f.following=?";
+        return this.jdbcTemplate.query(query,  (rs,rowNum) -> new GetUserResponse(
+                        rs.getInt("u.userNum"),
+                        rs.getString("u.userId"),
+                        rs.getString("u.userName"),
+                        rs.getString("u.userNickNAme"))
+                ,userNum);
     }
 
     // 팔로잉

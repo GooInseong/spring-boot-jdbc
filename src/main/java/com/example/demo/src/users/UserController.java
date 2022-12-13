@@ -20,13 +20,12 @@ public class UserController {
 
     private UserService service;
 
-    private UserDao dao;
 
     @Autowired
-    public UserController(UserProvider provider,UserService service, UserDao dao) {
+    public UserController(UserProvider provider,UserService service) {
         this.provider = provider;
         this.service = service;
-        this.dao = dao;
+
     }
 
     // 회원 가입
@@ -128,6 +127,15 @@ public class UserController {
     public BaseResponse<List<GetUserResponse>> getFollowerList(@PathVariable("userNum") int userNum){
         try{
             return new BaseResponse<>(provider.getFollowerInfo(userNum));
+        }catch(BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+    @GetMapping("/follow/following/{userNum}")
+    public BaseResponse<List<GetUserResponse>> getFollowingList(@PathVariable("userNum") int userNum){
+        try{
+            return new BaseResponse<>(provider.getFollowingInfo(userNum));
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());
         }

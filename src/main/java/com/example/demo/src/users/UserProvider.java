@@ -102,10 +102,18 @@ public class UserProvider {
 
     public List<GetUserResponse> getFollowerInfo(int userNum) throws BaseException{
         try{
-            List<Integer> follower= dao.getFollower(userNum);
-            return dao.getFollowerInfo(follower);
+            return dao.gertFollowerInfo(userNum);
         }catch(Exception exception){
             logger.error("App - getFollowerInfo Provider Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public List<GetUserResponse> getFollowingInfo(int userNum) throws BaseException{
+        try{
+            return dao.gertFollowerInfo(userNum);
+        }catch(Exception exception){
+            logger.error("App - getFollowingInfo Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }
