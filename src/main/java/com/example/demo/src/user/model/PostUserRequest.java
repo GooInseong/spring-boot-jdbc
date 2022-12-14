@@ -1,4 +1,4 @@
-package com.example.demo.src.users.model;
+package com.example.demo.src.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetUserResponse {
-    private int userNum;
+public class PostUserRequest {
     private String userId;
-    private String UserName;
+    private String userName;
+    private String userPw;
     private String userNickName;
 }

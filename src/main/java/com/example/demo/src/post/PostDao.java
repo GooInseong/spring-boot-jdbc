@@ -1,11 +1,10 @@
 package com.example.demo.src.post;
 
 import com.example.demo.src.post.model.*;
-import com.example.demo.src.users.model.GetUserResponse;
+import com.example.demo.src.user.model.GetUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -143,14 +142,6 @@ public class PostDao {
 
     }
 
-/*    select p.postNum,p.postContent,
-    u.userNum,u.userNickName,u.userImg,
-            (select count(l.liked)from likes l where l.postNum=p.postNum) 'like',
-            (select count(cm.userNum) from comments cm where cm.postNum=p.postNum and cm.status='active') 'comment'
-    from postTags tag
-    right join post p on tag.postNum=p.postNum
-    inner join user u on p.userNum=u.userNum
-    where tag.hashTag="해시태그";*/
 
     public List<PostResponse> getPostByTag(String hashTag){
         String query="select p.postNum, p.postContent, " +

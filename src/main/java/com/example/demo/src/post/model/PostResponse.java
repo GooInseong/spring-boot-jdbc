@@ -19,5 +19,4 @@ public class PostResponse {
     private String userImg;
     private int likesCnt;
     private int commentsCmt;
-
 }

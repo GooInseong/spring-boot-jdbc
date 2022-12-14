@@ -1,6 +1,6 @@
-package com.example.demo.src.users;
+package com.example.demo.src.user;
 
-import com.example.demo.src.users.model.*;
+import com.example.demo.src.user.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -92,9 +91,7 @@ public class UserDao {
                 return following;
             }
         },userNum);
-
     }
-    
     // 팔로워 조회
     public List<Integer> getFollower(int userNum){
         String query="select follower from follow where following=?";
@@ -107,7 +104,7 @@ public class UserDao {
         },userNum);
     }
 
-
+    // 팔로워 정보 조회
     public List<GetUserResponse> gertFollowerInfo(int userNum){
         String query="select u.userNum, u.userId, u.userName, u.userNickName from follow f " +
                 "inner join user u on f.following=u.userNum " +
@@ -119,7 +116,7 @@ public class UserDao {
                 rs.getString("u.userNickNAme"))
                 ,userNum);
     }
-
+    // 팔로잉 정보 조회
     public List<GetUserResponse> gertFollowingInfo(int userNum){
         String query="select u.userNum, u.userId, u.userName, u.userNickName from follow f " +
                 "inner join user u on f.follower=u.userNum " +
@@ -164,6 +161,7 @@ public class UserDao {
     // 유저 번호 조회
     public int checkUserNum(int userNum){
         String query="select exists(select userNum from user where status='active' and userNum=?)";
+        System.out.println(this.jdbcTemplate.queryForObject(query,int.class,userNum));
         return this.jdbcTemplate.queryForObject(query,int.class,userNum);
     }
     

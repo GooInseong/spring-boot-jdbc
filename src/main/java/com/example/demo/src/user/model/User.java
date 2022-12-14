@@ -1,4 +1,4 @@
-package com.example.demo.src.users.model;
+package com.example.demo.src.user.model;
 
 public class User {
     private int userNum;

@@ -1,8 +1,8 @@
-package com.example.demo.src.users;
+package com.example.demo.src.user;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
-import com.example.demo.src.users.model.*;
+import com.example.demo.src.user.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,14 +46,13 @@ public class UserController {
     @GetMapping("")
     public BaseResponse<List<GetUserResponse>> getUsers(@RequestParam(required = false) String userNickName){
         try{
-            if(userNickName==null){
-                return new BaseResponse<>(provider.getUsers());
-            }
+            // 쿼리스트링 있을 시 특정 유저 조회
+            if(userNickName==null) return new BaseResponse<>(provider.getUsers());
+            // 쿼리스트링 없이 전체 유저 조회
             return new BaseResponse<>(provider.getUserByNickName(userNickName));
         }catch(BaseException exception){
             return new BaseResponse<>((exception.getStatus()));
         }
-
     }
 
 
@@ -75,7 +74,6 @@ public class UserController {
     @DeleteMapping("")
     public BaseResponse<String> deleteUser(@RequestBody DeleteUserRequest req){
         String result="Fail to delete your account";
-        System.out.println("번호:"+req.getUserNum()+" 비밀번호:"+req.getUserPw());
         try{
             if(provider.checkPw(req)){
                 if(service.deleteUser(req)) result="Success to delete your account!";
@@ -94,7 +92,6 @@ public class UserController {
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());
         }
-
     }
 
     // 팔로우 하기
@@ -140,7 +137,5 @@ public class UserController {
             return new BaseResponse<>(exception.getStatus());
         }
     }
-
-
 
 }

@@ -24,6 +24,7 @@ public class StoryController {
         this.service = service;
     }
 
+    // 팔로우 유저 스토리 전체 조회
     @GetMapping("/{userNum}")
     public BaseResponse<List<StoryResponse>> getStories(@PathVariable("userNum")int userNum) {
         try{
@@ -33,6 +34,7 @@ public class StoryController {
         }
     }
 
+    // 스토리 작성
     @PostMapping("")
     public BaseResponse<String> postStory(@RequestBody PostStoryRequest req){
         String message="Fail to post your story";
@@ -45,6 +47,7 @@ public class StoryController {
         }
     }
 
+    // 스토리 삭제
     @DeleteMapping("")
     public BaseResponse<String> postStory(@RequestParam int storyNum){
         String message="Fail to delete your story";
@@ -56,6 +59,7 @@ public class StoryController {
         }
     }
 
+    // 특정 유저 스토리 조회
     @GetMapping("")
     public BaseResponse<List<StoryResponse>> getStoriesByUserNum(@RequestParam int userNum){
         try{

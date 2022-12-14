@@ -1,6 +1,6 @@
 package com.example.demo.src.post.model;
 
-import com.example.demo.src.users.model.GetUserResponse;
+import com.example.demo.src.user.model.GetUserResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

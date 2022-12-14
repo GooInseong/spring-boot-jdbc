@@ -1,10 +1,10 @@
-package com.example.demo.src.users;
+package com.example.demo.src.user;
 
 import com.example.demo.config.BaseException;
-import com.example.demo.src.users.model.DeleteUserRequest;
-import com.example.demo.src.users.model.PatchUserRequest;
-import com.example.demo.src.users.model.FollowRequest;
-import com.example.demo.src.users.model.PostUserRequest;
+import com.example.demo.src.user.model.DeleteUserRequest;
+import com.example.demo.src.user.model.PatchUserRequest;
+import com.example.demo.src.user.model.FollowRequest;
+import com.example.demo.src.user.model.PostUserRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -25,8 +25,8 @@ public class PostController {
 
 
 
-
-    @GetMapping("/")
+    // 전체 게시글 조회
+    @GetMapping("")
     public BaseResponse<List<PostResponse>> getPosts(@RequestParam("userNum") int userNum){
         try{
             return new BaseResponse<>(provider.getPosts(userNum));
@@ -34,7 +34,7 @@ public class PostController {
             return new BaseResponse<>(exception.getStatus());
         }
     }
-
+    // 특정 게시글 조회 API
     @GetMapping("/{postNum}")
     public BaseResponse<PostResponse> getPost(@PathVariable("postNum") int postNum){
         try{
@@ -44,6 +44,7 @@ public class PostController {
         }
     }
 
+    // 게시글 작성
     @PostMapping("")
     public BaseResponse<String> createPost(@RequestBody PostRequest req){
         String message="Fail to create post.";
@@ -56,6 +57,7 @@ public class PostController {
         }
     }
 
+    // 게시글 수정
     @PatchMapping("")
     public BaseResponse<String> modifyPost(@RequestBody PatchRequest req){
         String message="Fail to modify your post";
@@ -68,6 +70,7 @@ public class PostController {
         }
     }
 
+    // 게시글 삭제
     @DeleteMapping("")
     public BaseResponse<String> deletePost(@RequestBody DeleteRequest req){
         String message="Fail to delete your post.";
@@ -80,6 +83,7 @@ public class PostController {
         }
     }
 
+    // 좋아요 생성
     @PostMapping("/likes")
     public BaseResponse<String> postLikes(@RequestBody LikesRequest req){
         String message="Fail to likes the post!";
@@ -92,6 +96,7 @@ public class PostController {
         }
     }
 
+    // 좋아요 취소
     @PatchMapping("/likes")
     public BaseResponse<String> cancelLikes(@RequestBody LikesRequest req){
         String message="Fail to cancel the likes";
@@ -104,7 +109,8 @@ public class PostController {
         }
     }
 
-    @GetMapping("/likes/{postNum}")
+    // 좋아요 유저 정보 리스트 조회
+    @GetMapping("/likes-list/{postNum}")
     public BaseResponse<List<LikesResponse>> getLikesInfo(@PathVariable("postNum") int postNum){
         try{
             return new BaseResponse<>(provider.getLikesUserInfo(postNum));
@@ -113,6 +119,7 @@ public class PostController {
         }
     }
 
+    // 해시태그 검색
     @GetMapping("/hashtag-list")
     public BaseResponse<List<PostResponse>> getPostByHashTag(@RequestParam("hashTag") String hashTag){
         try{

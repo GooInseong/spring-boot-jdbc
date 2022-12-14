@@ -1,11 +1,11 @@
-package com.example.demo.src.users;
+package com.example.demo.src.user;
 
 
 import com.example.demo.config.BaseException;
-import com.example.demo.src.users.model.DeleteUserRequest;
-import com.example.demo.src.users.model.FollowRequest;
-import com.example.demo.src.users.model.GetFollowResponse;
-import com.example.demo.src.users.model.GetUserResponse;
+import com.example.demo.src.user.model.DeleteUserRequest;
+import com.example.demo.src.user.model.FollowRequest;
+import com.example.demo.src.user.model.GetFollowResponse;
+import com.example.demo.src.user.model.GetUserResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,6 @@ public class UserProvider {
 
     public List<GetUserResponse> getUsers() throws BaseException {
         try {
-
             return dao.getUsers();
         } catch (Exception exception) {
             logger.error("App - getUsers Provider Error", exception);
@@ -56,7 +55,6 @@ public class UserProvider {
             response.setFollowing(dao.getFollowing(userNum));
             response.setFollower(dao.getFollower(userNum));
             return response;
-
         }catch(Exception exception){
             logger.error("App - getFollow Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
@@ -85,7 +83,6 @@ public class UserProvider {
             logger.error("App - existUser Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
-
     }
 
     public boolean checkFollow(FollowRequest req) throws BaseException{
@@ -111,7 +108,7 @@ public class UserProvider {
 
     public List<GetUserResponse> getFollowingInfo(int userNum) throws BaseException{
         try{
-            return dao.gertFollowerInfo(userNum);
+            return dao.gertFollowingInfo(userNum);
         }catch(Exception exception){
             logger.error("App - getFollowingInfo Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
