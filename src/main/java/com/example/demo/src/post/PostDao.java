@@ -104,7 +104,7 @@ public class PostDao {
     }
 
     public int deletePost(int postNum){
-        String query="delete from post where postNum=?";
+        String query="update post set status='inactive' where postNum=?";
         return this.jdbcTemplate.update(query,postNum);
     }
 
@@ -163,7 +163,8 @@ public class PostDao {
                 "where tag.hashTag=? ";
         String query1="select p.postNum,p.postContent,u.userNum,u.userNickName,u.userImg,(select count(l.liked)from likes l where l.postNum=p.postNum and l.liked=1) 'like' ,(select count(cm.userNum)from comments cm where cm.postNum=p.postNum and p.status='active') 'comment' " +
                 "from postTags tag right join post p on tag.postNum=p.postNum inner join user u on p.userNum=u.userNum where tag.hashTag=?";
-        return this.jdbcTemplate.query(query1, new RowMapper<PostResponse>() {
+
+        return this.jdbcTemplate.query(query, new RowMapper<PostResponse>() {
             @Override
             public PostResponse mapRow(ResultSet rs, int rowNum) throws SQLException {
                 PostResponse postResponse = new PostResponse();
